@@ -25,8 +25,7 @@ export default function LoginScreen({ navigation }) {
       const data = await response.json();
 
       if (response.ok) {
-        Alert.alert("Success", "Login successful!");
-        // We'll navigate to home screen later
+        navigation.navigate("Home", { email: data.user.email });
       } else {
         Alert.alert("Error", data.error || "Login failed");
       }
