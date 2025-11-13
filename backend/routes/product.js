@@ -86,16 +86,22 @@ router.get("/nearby", async (req, res) => {
         s.current_longitude,
         (
           6371 * acos(
-            cos(radians($1)) * cos(radians(s.current_latitude)) *
-            cos(radians(s.current_longitude) - radians($2)) +
-            sin(radians($1)) * sin(radians(s.current_latitude))
+            cos(radians($1::float)) * cos(radians(s.current_latitude::float)) *
+            cos(radians(s.current_longitude::float) - radians($2::float)) +
+            sin(radians($1::float)) * sin(radians(s.current_latitude::float))
           )
         ) AS distance
       FROM sellers s
       WHERE s.is_active = true
         AND s.current_latitude IS NOT NULL
         AND s.current_longitude IS NOT NULL
-      HAVING distance < $3
+        AND (
+          6371 * acos(
+            cos(radians($1::float)) * cos(radians(s.current_latitude::float)) *
+            cos(radians(s.current_longitude::float) - radians($2::float)) +
+            sin(radians($1::float)) * sin(radians(s.current_latitude::float))
+          )
+        ) < $3::float
       ORDER BY distance
     `;
 

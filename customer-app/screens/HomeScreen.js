@@ -8,11 +8,19 @@ export default function HomeScreen({ navigation, route }) {
     navigation.navigate("Login");
   };
 
+  const handleFindSellers = () => {
+    navigation.navigate("SellersMap");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to FreshFind!</Text>
       <Text style={styles.email}>{email}</Text>
       <Text style={styles.subtitle}>Find fresh produce near you</Text>
+
+      <TouchableOpacity style={styles.findButton} onPress={handleFindSellers}>
+        <Text style={styles.buttonText}>Find Nearby Sellers</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutText}>Logout</Text>
@@ -38,12 +46,25 @@ const styles = StyleSheet.create({
   email: {
     fontSize: 16,
     color: "#666",
-    marginBottom: 20,
+    marginBottom: 10,
   },
   subtitle: {
     fontSize: 18,
     color: "#333",
     marginBottom: 40,
+  },
+  findButton: {
+    width: "80%",
+    paddingVertical: 15,
+    backgroundColor: "#2ecc71",
+    borderRadius: 8,
+    marginBottom: 20,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   logoutButton: {
     paddingHorizontal: 30,
