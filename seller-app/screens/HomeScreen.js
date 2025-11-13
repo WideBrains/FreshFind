@@ -12,6 +12,10 @@ export default function HomeScreen({ navigation, route }) {
     navigation.navigate("AddProduct", { sellerId });
   };
 
+  const handleViewProducts = () => {
+    navigation.navigate("ProductsList", { sellerId });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{businessName || "Seller Dashboard"}</Text>
@@ -19,6 +23,10 @@ export default function HomeScreen({ navigation, route }) {
 
       <TouchableOpacity style={styles.addButton} onPress={handleAddProduct}>
         <Text style={styles.buttonText}>Add New Product</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.viewButton} onPress={handleViewProducts}>
+        <Text style={styles.buttonText}>View My Products</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
@@ -51,6 +59,14 @@ const styles = StyleSheet.create({
     width: "80%",
     paddingVertical: 15,
     backgroundColor: "#e74c3c",
+    borderRadius: 8,
+    marginBottom: 15,
+    alignItems: "center",
+  },
+  viewButton: {
+    width: "80%",
+    paddingVertical: 15,
+    backgroundColor: "#3498db",
     borderRadius: 8,
     marginBottom: 20,
     alignItems: "center",
