@@ -2,17 +2,24 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 export default function HomeScreen({ navigation, route }) {
-  const { email } = route.params;
+  const { email, sellerId, businessName } = route.params;
 
   const handleLogout = () => {
     navigation.navigate("Login");
   };
 
+  const handleAddProduct = () => {
+    navigation.navigate("AddProduct", { sellerId });
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Seller Dashboard</Text>
+      <Text style={styles.title}>{businessName || "Seller Dashboard"}</Text>
       <Text style={styles.email}>{email}</Text>
-      <Text style={styles.subtitle}>Manage your products</Text>
+
+      <TouchableOpacity style={styles.addButton} onPress={handleAddProduct}>
+        <Text style={styles.buttonText}>Add New Product</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutText}>Logout</Text>
@@ -38,17 +45,25 @@ const styles = StyleSheet.create({
   email: {
     fontSize: 16,
     color: "#666",
-    marginBottom: 20,
-  },
-  subtitle: {
-    fontSize: 18,
-    color: "#333",
     marginBottom: 40,
+  },
+  addButton: {
+    width: "80%",
+    paddingVertical: 15,
+    backgroundColor: "#e74c3c",
+    borderRadius: 8,
+    marginBottom: 20,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   logoutButton: {
     paddingHorizontal: 30,
     paddingVertical: 12,
-    backgroundColor: "#e74c3c",
+    backgroundColor: "#95a5a6",
     borderRadius: 8,
   },
   logoutText: {
