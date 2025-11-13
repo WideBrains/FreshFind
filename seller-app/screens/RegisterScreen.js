@@ -36,18 +36,15 @@ export default function RegisterScreen({ navigation }) {
       );
 
       const data = await response.json();
+
       if (response.ok) {
-        Alert.alert("Success", "Account created! Please login.");
-        navigation.navigate("Login");
+        navigation.navigate("ProfileSetup", {
+          userId: data.user.id,
+          email: data.user.email,
+        });
       } else {
-        Alert.alert("Error", JSON.stringify(data));
+        Alert.alert("Error", data.error || "Registration failed");
       }
-      // if (response.ok) {
-      //   Alert.alert("Success", "Account created! Please login.");
-      //   navigation.navigate("Login");
-      // } else {
-      //   Alert.alert("Error", data.error || "Registration failed");
-      // }
     } catch (error) {
       Alert.alert("Error", "Could not connect to server");
     }
