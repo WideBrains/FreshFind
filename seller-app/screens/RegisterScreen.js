@@ -20,17 +20,20 @@ export default function RegisterScreen({ navigation }) {
     }
 
     try {
-      const response = await fetch("http://192.168.0.17:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          role: "seller",
-        }),
-      });
+      const response = await fetch(
+        "http://192.168.0.17:5000/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            role: "seller",
+          }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {
